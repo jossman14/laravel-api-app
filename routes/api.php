@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GithubController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/address', [AddressController::class, 'store']);
     Route::put('/address', [AddressController::class, 'update']);
     Route::delete('/address', [AddressController::class, 'destroy']);
+    //github repo
+    Route::get('/getApi', [GithubController::class, 'getApi']);
+
 
 
 });
