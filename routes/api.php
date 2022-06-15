@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+// Protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Route::resource('profile', UserController::class);
+    // Route::resource('address', AddressController::class);
+    //profile
+    Route::get('/profile', [UserController::class, 'index']);
+    Route::put('/profile', [UserController::class, 'update']);
+    Route::delete('/profile', [UserController::class, 'destroy']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    //address
+    Route::get('/address', [AddressController::class, 'index']);
+    Route::post('/address', [AddressController::class, 'store']);
+    Route::put('/address', [AddressController::class, 'update']);
+    Route::delete('/address', [AddressController::class, 'destroy']);
+
+
 });
+
+// Public routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);

@@ -18,6 +18,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
+            'address_delete' => 0,
             'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = '1999-10-19'),
             'city' => $this->faker->city(),
             'email' => $this->faker->unique()->safeEmail(),
